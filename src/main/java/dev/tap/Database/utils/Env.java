@@ -1,4 +1,4 @@
-package dev.tap.Database;
+package dev.tap.Database.utils;
 
 import java.io.IOException;
 import java.nio.file.Files;

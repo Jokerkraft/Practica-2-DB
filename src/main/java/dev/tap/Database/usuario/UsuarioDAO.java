@@ -1,5 +1,7 @@
-package DAOV2;
+package dev.tap.Database.usuario;
 
+import dev.tap.Algoritmos.Models.Usuario;
+import dev.tap.Database.utils.GenericDAO;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -10,9 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Implementación de DAO para la entidad Usuario
- */
 public class UsuarioDAO extends GenericDAO<Usuario> {
 
     public UsuarioDAO(Connection connection) {
@@ -30,7 +29,6 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
             stmt.setDate(4, Date.valueOf(usuario.getFechaRegistro()));
 
             int affectedRows = stmt.executeUpdate();
-
             if (affectedRows == 0) {
                 return false;
             }
@@ -42,7 +40,6 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
                     return false;
                 }
             }
-
             return true;
         } catch (SQLException e) {
             System.err.println("Error al guardar usuario: " + e.getMessage());
@@ -60,7 +57,6 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
             stmt.setString(3, usuario.getPassword());
             stmt.setDate(4, Date.valueOf(usuario.getFechaRegistro()));
             stmt.setLong(5, usuario.getId());
-
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Error al actualizar usuario: " + e.getMessage());
@@ -74,7 +70,6 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
-
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Error al eliminar usuario: " + e.getMessage());
@@ -107,8 +102,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
         List<Usuario> usuarios = new ArrayList<>();
 
         try (PreparedStatement stmt = connection.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
+                ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 usuarios.add(mapResultSetToEntity(rs));
             }
@@ -130,11 +124,6 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
         return usuario;
     }
 
-    /**
-     * Busca usuarios por nombre
-     * @param nombre Nombre a buscar
-     * @return Lista de usuarios que coinciden con el nombre
-     */
     public List<Usuario> findByNombre(String nombre) {
         String sql = "SELECT * FROM usuarios WHERE nombre LIKE ?";
         List<Usuario> usuarios = new ArrayList<>();
