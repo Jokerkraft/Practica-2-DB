@@ -17,11 +17,11 @@ public final class Env {
     public static String obtenerRequerida(String nombre) {
         String valor = System.getenv(nombre);
 
-        if (valor == null  valor.isBlank()) {
+        if (valor == null || valor.isBlank()) {
             valor = VALORES_ENV.get(nombre);
         }
 
-        if (valor == null  valor.isBlank()) {
+        if (valor == null || valor.isBlank()) {
             throw new IllegalStateException("Falta la configuracion: " + nombre + " (variable del sistema o .env)");
         }
 
@@ -39,7 +39,7 @@ public final class Env {
             List<String> lineas = Files.readAllLines(RUTA_ENV);
             for (String linea : lineas) {
                 String limpia = linea.trim();
-                if (limpia.isEmpty()  limpia.startsWith("#")  !limpia.contains("=")) {
+                if (limpia.isEmpty() || limpia.startsWith("#") || !limpia.contains("=")) {
                     continue;
                 }
 

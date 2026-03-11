@@ -1,5 +1,13 @@
 package dev.tap.Algoritmos;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 public class EstudianteDAOImpl implements EstudianteDAO {
     private Connection conn;
 
@@ -27,10 +35,9 @@ public class EstudianteDAOImpl implements EstudianteDAO {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return new Estudiante(
-                    rs.getInt("id"),
-                    rs.getString("nombre"),
-                    rs.getString("correo")
-                );
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("correo"));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -43,13 +50,12 @@ public class EstudianteDAOImpl implements EstudianteDAO {
         List<Estudiante> lista = new ArrayList<>();
         String sql = "SELECT * FROM estudiantes";
         try (Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+                ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 lista.add(new Estudiante(
-                    rs.getInt("id"),
-                    rs.getString("nombre"),
-                    rs.getString("correo")
-                ));
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("correo")));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -81,4 +87,3 @@ public class EstudianteDAOImpl implements EstudianteDAO {
         }
     }
 }
-
