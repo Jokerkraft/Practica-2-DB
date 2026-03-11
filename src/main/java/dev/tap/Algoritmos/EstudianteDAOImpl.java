@@ -86,4 +86,10 @@ public class EstudianteDAOImpl implements EstudianteDAO {
             ex.printStackTrace();
         }
     }
+
+    @Override
+    public void Insertar(Estudiante e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'Insertar'");
+    }
 }

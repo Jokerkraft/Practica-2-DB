@@ -12,4 +12,6 @@ public interface EstudianteDAO {
     void eliminar(int id);
 
     void insertar(Estudiante e);
+
+    void actualizar(Estudiante e);
 }

@@ -1,7 +1,10 @@
 package dev.tap;
 
+import dev.tap.Database.TestDb;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        // test db
+        TestDb.main(args);
     }
 }
